@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@noble/ed25519": "^2",
+    "@noble/hashes": "^2.0.1",
     "@prisma/client": "^6",
     "bcrypt": "^5",
     "nanoid": "^3",
