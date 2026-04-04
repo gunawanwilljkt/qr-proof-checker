@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Issuer {
+  id                  String   @id @default(uuid())
+  name                String
+  email               String   @unique
+  passwordHash        String
+  publicKey           String
+  encryptedPrivateKey String
+  createdAt           DateTime @default(now())
+  bills               Bill[]
+  sessions            Session[]
+}
+
+model Bill {
+  id                       String    @id
+  issuerId                 String
+  issuer                   Issuer    @relation(fields: [issuerId], references: [id])
+  guestName                String?
+  subtotalFood             Int
+  subtotalBeverage         Int
+  subtotal                 Int
+  serviceCharge            Int
+  localTax                 Int
+  grandTotal               Int
+  billDateTime             DateTime
+  paidDateTime             DateTime?
+  paymentType              String
+  voucherUse               Boolean   @default(false)
+  voucherCode              String?
+  marketplacePartner       String?
+  marketplaceReferenceCode String?
+  marketplaceBillDateTime  DateTime?
+  signature                String
+  revoked                  Boolean   @default(false)
+  revokedAt                DateTime?
+  createdAt                DateTime  @default(now())
+  revocationLogs           RevocationLog[]
+}
+
+model Session {
+  id        String   @id
+  issuerId  String
+  issuer    Issuer   @relation(fields: [issuerId], references: [id])
+  expiresAt DateTime
+}
+
+model RevocationLog {
+  id        String   @id @default(uuid())
+  billId    String
+  bill      Bill     @relation(fields: [billId], references: [id])
+  reason    String
+  createdAt DateTime @default(now())
+}
