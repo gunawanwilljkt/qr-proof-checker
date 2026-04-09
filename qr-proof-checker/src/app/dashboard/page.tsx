@@ -8,7 +8,6 @@ interface Bill {
   id: string;
   guestName: string | null;
   grandTotal: number;
-  vat: number;
   serviceTax: number;
   cityTax: number;
   subtotalFood: number;
@@ -76,7 +75,7 @@ export default function DashboardPage() {
   }
 
   function exportCsv() {
-    const headers = ["Bill ID", "Guest Name", "Subtotal Food", "Subtotal Beverage", "Subtotal", "Service Charge", "VAT", "Service Tax", "City Tax", "Grand Total", "Payment Type", "Date", "Status"];
+    const headers = ["Bill ID", "Guest Name", "Subtotal Food", "Subtotal Beverage", "Subtotal", "Service Charge", "Service Tax", "City Tax", "Grand Total", "Payment Type", "Date", "Status"];
     const rows = filtered.map((b) => [
       b.id,
       b.guestName || "",
@@ -84,7 +83,6 @@ export default function DashboardPage() {
       b.subtotalBeverage,
       b.subtotal,
       b.serviceCharge,
-      b.vat,
       b.serviceTax,
       b.cityTax,
       b.grandTotal,

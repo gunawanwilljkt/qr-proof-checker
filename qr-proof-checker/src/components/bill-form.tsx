@@ -32,7 +32,6 @@ export default function BillForm({ onSubmit, loading }: BillFormProps) {
       subtotalBeverage: Number(form.get("subtotalBeverage")),
       subtotal: Number(form.get("subtotal")),
       serviceCharge: Number(form.get("serviceCharge")),
-      vat: Number(form.get("vat")),
       serviceTax: Number(form.get("serviceTax")),
       cityTax: Number(form.get("cityTax")),
       grandTotal: Number(form.get("grandTotal")),
@@ -83,11 +82,7 @@ export default function BillForm({ onSubmit, loading }: BillFormProps) {
 
       <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-4">
         <h3 className="mb-3 text-sm font-semibold text-indigo-400 uppercase tracking-wide">Tax Breakdown</h3>
-        <div className="grid grid-cols-3 gap-4">
-          <div>
-            <label className={labelClass}>VAT / PPN (11%)</label>
-            <input name="vat" type="number" min="0" required className={inputClass} />
-          </div>
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <label className={labelClass}>Service Tax / PB1 (10%)</label>
             <input name="serviceTax" type="number" min="0" required className={inputClass} />

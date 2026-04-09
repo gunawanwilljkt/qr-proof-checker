@@ -161,10 +161,9 @@ async function main() {
   for (const cfg of billConfigs) {
     const subtotal = cfg.food + cfg.bev;
     const serviceCharge = Math.round(subtotal * 0.1);
-    const vat = Math.round(subtotal * 0.11);
     const serviceTax = Math.round(subtotal * 0.1);
     const cityTax = Math.round(subtotal * 0.01);
-    const grandTotal = subtotal + serviceCharge + vat + serviceTax + cityTax;
+    const grandTotal = subtotal + serviceCharge + serviceTax + cityTax;
 
     const billDate = new Date(now - cfg.daysAgo * DAY);
     const billId = `SEED${String(billCount + 1).padStart(4, "0")}`;
@@ -179,10 +178,9 @@ async function main() {
       sb: cfg.bev,
       st: subtotal,
       sc: serviceCharge,
-      vat,
       stx: serviceTax,
       ctx: cityTax,
-      lt: vat + serviceTax + cityTax,
+      lt: serviceTax + cityTax,
       gt: grandTotal,
       bdt: billDate.toISOString(),
       pt: cfg.pt,
@@ -213,7 +211,6 @@ async function main() {
         subtotalBeverage: cfg.bev,
         subtotal,
         serviceCharge,
-        vat,
         serviceTax,
         cityTax,
         grandTotal,

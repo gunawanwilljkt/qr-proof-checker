@@ -9,7 +9,6 @@ interface VerificationResultProps {
     sb: number;
     st: number;
     sc: number;
-    vat?: number;
     stx?: number;
     ctx?: number;
     lt: number;
@@ -93,15 +92,9 @@ export default function VerificationResult({
             <span className="text-slate-500">Service Charge:</span>
             <span className="text-slate-200">{formatCurrency(billData.sc)}</span>
 
-            {(billData.vat !== undefined || billData.stx !== undefined || billData.ctx !== undefined) && (
+            {(billData.stx !== undefined || billData.ctx !== undefined) && (
               <>
                 <span className="col-span-2 mt-2 text-xs font-semibold text-indigo-400 uppercase tracking-wide">Tax Breakdown</span>
-                {billData.vat !== undefined && (
-                  <>
-                    <span className="text-slate-500">VAT / PPN (11%):</span>
-                    <span className="text-slate-200">{formatCurrency(billData.vat)}</span>
-                  </>
-                )}
                 {billData.stx !== undefined && (
                   <>
                     <span className="text-slate-500">Service Tax / PB1 (10%):</span>

@@ -28,7 +28,6 @@ model Bill {
   subtotalBeverage         Int
   subtotal                 Int
   serviceCharge            Int
-  vat                      Int       @default(0)
   serviceTax               Int       @default(0)
   cityTax                  Int       @default(0)
   grandTotal               Int

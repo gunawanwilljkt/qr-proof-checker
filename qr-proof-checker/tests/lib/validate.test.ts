@@ -7,10 +7,9 @@ const validInput: BillInput = {
   subtotalBeverage: 75000,
   subtotal: 225000,
   serviceCharge: 22500,
-  vat: 24750,
   serviceTax: 22500,
   cityTax: 5000,
-  grandTotal: 299750,
+  grandTotal: 275000,
   billDateTime: "2026-04-04T19:30:00+07:00",
   paidDateTime: "2026-04-04T20:15:00+07:00",
   paymentType: "card",
@@ -33,10 +32,9 @@ describe("validateBillInput", () => {
       subtotalBeverage: 0,
       subtotal: 50000,
       serviceCharge: 5000,
-      vat: 5500,
       serviceTax: 5000,
       cityTax: 1000,
-      grandTotal: 66500,
+      grandTotal: 61000,
       billDateTime: "2026-04-04T12:00:00+07:00",
       paymentType: "cash",
       voucherUse: false,
@@ -48,12 +46,6 @@ describe("validateBillInput", () => {
     const result = validateBillInput({ ...validInput, subtotalFood: -1 });
     expect(result.success).toBe(false);
     expect(result.error).toContain("subtotalFood");
-  });
-
-  it("rejects negative vat", () => {
-    const result = validateBillInput({ ...validInput, vat: -1 });
-    expect(result.success).toBe(false);
-    expect(result.error).toContain("vat");
   });
 
   it("rejects negative serviceTax", () => {

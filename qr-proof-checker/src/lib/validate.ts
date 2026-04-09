@@ -6,7 +6,6 @@ export interface BillInput {
   subtotalBeverage: number;
   subtotal: number;
   serviceCharge: number;
-  vat: number;
   serviceTax: number;
   cityTax: number;
   grandTotal: number;
@@ -30,7 +29,6 @@ export function validateBillInput(input: Partial<BillInput>): ValidationResult {
     "subtotalBeverage",
     "subtotal",
     "serviceCharge",
-    "vat",
     "serviceTax",
     "cityTax",
     "grandTotal",

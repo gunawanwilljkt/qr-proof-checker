@@ -6,7 +6,6 @@ export interface BillPayload {
   sb: number;
   st: number;
   sc: number;
-  vat: number;
   stx: number;
   ctx: number;
   lt: number;
