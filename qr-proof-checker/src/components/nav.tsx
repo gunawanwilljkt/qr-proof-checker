@@ -30,15 +30,15 @@ export default function Nav() {
   }
 
   return (
-    <nav className="border-b border-gray-200 bg-white px-6 py-4">
+    <nav className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl px-6 py-4">
       <div className="mx-auto flex max-w-5xl items-center justify-between">
-        <Link href="/" className="text-lg font-bold text-gray-900">
+        <Link href="/" className="text-lg font-bold text-slate-50">
           QR Proof Checker
         </Link>
         <div className="flex items-center gap-4">
           <Link
             href="/verify"
-            className="text-sm text-gray-600 hover:text-gray-900"
+            className="text-sm text-slate-400 hover:text-slate-50 transition-colors"
           >
             Verify
           </Link>
@@ -46,13 +46,13 @@ export default function Nav() {
             <>
               <Link
                 href="/dashboard"
-                className="text-sm text-gray-600 hover:text-gray-900"
+                className="text-sm text-slate-400 hover:text-slate-50 transition-colors"
               >
                 Dashboard
               </Link>
               <button
                 onClick={handleLogout}
-                className="text-sm text-gray-600 hover:text-gray-900"
+                className="text-sm text-slate-400 hover:text-slate-50 transition-colors"
               >
                 Logout
               </button>
@@ -60,7 +60,7 @@ export default function Nav() {
           ) : (
             <Link
               href="/login"
-              className="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700"
+              className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-500 transition-colors"
             >
               Sign In
             </Link>
