@@ -29,7 +29,6 @@ model Bill {
   subtotal                 Int
   serviceCharge            Int
   serviceTax               Int       @default(0)
-  cityTax                  Int       @default(0)
   grandTotal               Int
   billDateTime             DateTime
   paidDateTime             DateTime?

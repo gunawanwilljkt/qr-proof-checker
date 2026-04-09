@@ -7,7 +7,6 @@ export interface BillInput {
   subtotal: number;
   serviceCharge: number;
   serviceTax: number;
-  cityTax: number;
   grandTotal: number;
   billDateTime: string;
   paidDateTime?: string;
@@ -30,7 +29,6 @@ export function validateBillInput(input: Partial<BillInput>): ValidationResult {
     "subtotal",
     "serviceCharge",
     "serviceTax",
-    "cityTax",
     "grandTotal",
   ] as const;
 

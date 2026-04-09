@@ -9,7 +9,6 @@ interface Bill {
   guestName: string | null;
   grandTotal: number;
   serviceTax: number;
-  cityTax: number;
   subtotalFood: number;
   subtotalBeverage: number;
   subtotal: number;
@@ -75,7 +74,7 @@ export default function DashboardPage() {
   }
 
   function exportCsv() {
-    const headers = ["Bill ID", "Guest Name", "Subtotal Food", "Subtotal Beverage", "Subtotal", "Service Charge", "Service Tax", "City Tax", "Grand Total", "Payment Type", "Date", "Status"];
+    const headers = ["Bill ID", "Guest Name", "Subtotal Food", "Subtotal Beverage", "Subtotal", "Service Charge", "Service Tax", "Grand Total", "Payment Type", "Date", "Status"];
     const rows = filtered.map((b) => [
       b.id,
       b.guestName || "",
@@ -84,7 +83,6 @@ export default function DashboardPage() {
       b.subtotal,
       b.serviceCharge,
       b.serviceTax,
-      b.cityTax,
       b.grandTotal,
       b.paymentType,
       new Date(b.billDateTime).toISOString(),

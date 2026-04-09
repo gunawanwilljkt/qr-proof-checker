@@ -11,7 +11,6 @@ interface BillDetail {
   subtotal: number;
   serviceCharge: number;
   serviceTax: number;
-  cityTax: number;
   grandTotal: number;
   billDateTime: string;
   paidDateTime: string | null;
@@ -129,12 +128,10 @@ export default function BillDetailPage() {
           <span className="text-slate-200">{formatCurrency(bill.serviceCharge)}</span>
 
           <span className="col-span-2 mt-2 text-xs font-semibold text-indigo-400 uppercase tracking-wide">Tax Breakdown</span>
-          <span className="text-slate-500">Service Tax / PB1 (10%):</span>
+          <span className="text-slate-500">PB1 (10%):</span>
           <span className="text-slate-200">{formatCurrency(bill.serviceTax)}</span>
-          <span className="text-slate-500">City Tax:</span>
-          <span className="text-slate-200">{formatCurrency(bill.cityTax)}</span>
           <span className="text-slate-500">Total Tax:</span>
-          <span className="text-slate-200">{formatCurrency(bill.serviceTax + bill.cityTax)}</span>
+          <span className="text-slate-200">{formatCurrency(bill.serviceTax)}</span>
 
           <span className="col-span-2 mt-2 border-t border-slate-700 pt-2"></span>
           <span className="text-slate-400 font-bold">Grand Total:</span>

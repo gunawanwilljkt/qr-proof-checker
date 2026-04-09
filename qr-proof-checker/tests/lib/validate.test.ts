@@ -8,8 +8,7 @@ const validInput: BillInput = {
   subtotal: 225000,
   serviceCharge: 22500,
   serviceTax: 22500,
-  cityTax: 5000,
-  grandTotal: 275000,
+  grandTotal: 270000,
   billDateTime: "2026-04-04T19:30:00+07:00",
   paidDateTime: "2026-04-04T20:15:00+07:00",
   paymentType: "card",
@@ -33,8 +32,7 @@ describe("validateBillInput", () => {
       subtotal: 50000,
       serviceCharge: 5000,
       serviceTax: 5000,
-      cityTax: 1000,
-      grandTotal: 61000,
+      grandTotal: 60000,
       billDateTime: "2026-04-04T12:00:00+07:00",
       paymentType: "cash",
       voucherUse: false,
@@ -52,12 +50,6 @@ describe("validateBillInput", () => {
     const result = validateBillInput({ ...validInput, serviceTax: -1 });
     expect(result.success).toBe(false);
     expect(result.error).toContain("serviceTax");
-  });
-
-  it("rejects negative cityTax", () => {
-    const result = validateBillInput({ ...validInput, cityTax: -1 });
-    expect(result.success).toBe(false);
-    expect(result.error).toContain("cityTax");
   });
 
   it("rejects invalid payment type", () => {
