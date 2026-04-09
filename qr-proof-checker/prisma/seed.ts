@@ -190,6 +190,9 @@ async function main() {
       pub: cfg.issuer.publicKey,
     };
 
+    const paidDate = new Date(billDate.getTime() + 45 * 60 * 1000);
+    signableData.pdt = paidDate.toISOString();
+
     const guestName = GUEST_NAMES[cfg.guest] || null;
     if (guestName) signableData.gn = guestName;
     if (hasVoucher) signableData.vc = VOUCHER_CODES[cfg.voucher!];
@@ -215,7 +218,7 @@ async function main() {
         cityTax,
         grandTotal,
         billDateTime: billDate,
-        paidDateTime: new Date(billDate.getTime() + 45 * 60 * 1000),
+        paidDateTime: paidDate,
         paymentType: cfg.pt,
         voucherUse: hasVoucher,
         voucherCode: hasVoucher ? VOUCHER_CODES[cfg.voucher!] : null,
