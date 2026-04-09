@@ -32,9 +32,9 @@ export default function NewBillPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">Create New Bill</h1>
+      <h1 className="mb-6 text-2xl font-bold text-slate-50">Create New Bill</h1>
       {error && (
-        <p className="mb-4 rounded bg-red-50 p-3 text-sm text-red-600">{error}</p>
+        <p className="mb-4 rounded-lg bg-rose-500/10 border border-rose-500/20 p-3 text-sm text-rose-400">{error}</p>
       )}
       <BillForm onSubmit={handleSubmit} loading={loading} />
     </div>

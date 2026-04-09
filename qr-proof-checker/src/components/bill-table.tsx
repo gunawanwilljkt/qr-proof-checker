@@ -33,47 +33,47 @@ export default function BillTable({ bills }: { bills: Bill[] }) {
 
   if (bills.length === 0) {
     return (
-      <p className="py-8 text-center text-gray-500">
-        No bills yet. Create your first bill.
+      <p className="py-8 text-center text-slate-500">
+        No bills match your filters.
       </p>
     );
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto rounded-lg border border-slate-700/50">
       <table className="w-full text-left text-sm">
-        <thead className="border-b text-gray-600">
+        <thead className="border-b border-slate-700 bg-slate-800/50 text-slate-400">
           <tr>
-            <th className="py-3 pr-4">ID</th>
-            <th className="py-3 pr-4">Guest</th>
-            <th className="py-3 pr-4">Total</th>
-            <th className="py-3 pr-4">Payment</th>
-            <th className="py-3 pr-4">Date</th>
-            <th className="py-3 pr-4">Status</th>
+            <th className="py-3 px-4">ID</th>
+            <th className="py-3 px-4">Guest</th>
+            <th className="py-3 px-4">Total</th>
+            <th className="py-3 px-4">Payment</th>
+            <th className="py-3 px-4">Date</th>
+            <th className="py-3 px-4">Status</th>
           </tr>
         </thead>
         <tbody>
           {bills.map((bill) => (
-            <tr key={bill.id} className="border-b hover:bg-gray-50">
-              <td className="py-3 pr-4">
+            <tr key={bill.id} className="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
+              <td className="py-3 px-4">
                 <Link
                   href={`/dashboard/bills/${bill.id}`}
-                  className="text-blue-600 hover:underline"
+                  className="text-indigo-400 hover:text-indigo-300"
                 >
                   {bill.id}
                 </Link>
               </td>
-              <td className="py-3 pr-4">{bill.guestName || "-"}</td>
-              <td className="py-3 pr-4">{formatCurrency(bill.grandTotal)}</td>
-              <td className="py-3 pr-4 capitalize">{bill.paymentType}</td>
-              <td className="py-3 pr-4">{formatDate(bill.billDateTime)}</td>
-              <td className="py-3 pr-4">
+              <td className="py-3 px-4 text-slate-300">{bill.guestName || "-"}</td>
+              <td className="py-3 px-4 text-slate-300">{formatCurrency(bill.grandTotal)}</td>
+              <td className="py-3 px-4 capitalize text-slate-300">{bill.paymentType}</td>
+              <td className="py-3 px-4 text-slate-300">{formatDate(bill.billDateTime)}</td>
+              <td className="py-3 px-4">
                 {bill.revoked ? (
-                  <span className="rounded bg-red-100 px-2 py-1 text-xs text-red-700">
+                  <span className="rounded-full bg-rose-500/10 px-2.5 py-1 text-xs font-medium text-rose-400">
                     Revoked
                   </span>
                 ) : (
-                  <span className="rounded bg-green-100 px-2 py-1 text-xs text-green-700">
+                  <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-400">
                     Active
                   </span>
                 )}
