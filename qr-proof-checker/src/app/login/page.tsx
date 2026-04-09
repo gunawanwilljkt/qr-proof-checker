@@ -36,49 +36,51 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto max-w-md py-12">
-      <h1 className="mb-6 text-2xl font-bold">Sign In</h1>
-      {error && (
-        <p className="mb-4 rounded bg-red-50 p-3 text-sm text-red-600">
-          {error}
+      <div className="rounded-xl border border-slate-700/50 bg-slate-900/50 backdrop-blur-xl p-8 shadow-xl">
+        <h1 className="mb-6 text-2xl font-bold text-slate-50">Sign In</h1>
+        {error && (
+          <p className="mb-4 rounded-lg bg-rose-500/10 border border-rose-500/20 p-3 text-sm text-rose-400">
+            {error}
+          </p>
+        )}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-400">
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              required
+              className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-slate-50"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-400">
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              required
+              className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-slate-50"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-lg bg-indigo-600 py-2.5 text-white font-medium hover:bg-indigo-500 disabled:opacity-50 transition-colors"
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
+        </form>
+        <p className="mt-4 text-center text-sm text-slate-500">
+          New here?{" "}
+          <Link href="/register" className="text-indigo-400 hover:text-indigo-300">
+            Register
+          </Link>
         </p>
-      )}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            name="email"
-            type="email"
-            required
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <input
-            name="password"
-            type="password"
-            required
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded bg-blue-600 py-2 text-white hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? "Signing in..." : "Sign In"}
-        </button>
-      </form>
-      <p className="mt-4 text-center text-sm text-gray-600">
-        New here?{" "}
-        <Link href="/register" className="text-blue-600 hover:underline">
-          Register
-        </Link>
-      </p>
+      </div>
     </div>
   );
 }
