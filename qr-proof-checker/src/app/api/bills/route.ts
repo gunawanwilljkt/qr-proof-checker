@@ -38,6 +38,8 @@ export async function POST(request: Request) {
   const secret = process.env.ENCRYPTION_SECRET || "0".repeat(64);
   const privateKey = decryptPrivateKey(issuer.encryptedPrivateKey, secret);
 
+  const localTaxTotal = input.vat + input.serviceTax + input.cityTax;
+
   const signableData: Record<string, unknown> = {
     v: 1,
     iss: issuer.name,
@@ -45,7 +47,10 @@ export async function POST(request: Request) {
     sb: input.subtotalBeverage,
     st: input.subtotal,
     sc: input.serviceCharge,
-    lt: input.localTax,
+    vat: input.vat,
+    stx: input.serviceTax,
+    ctx: input.cityTax,
+    lt: localTaxTotal,
     gt: input.grandTotal,
     bdt: input.billDateTime,
     pt: input.paymentType,
@@ -70,7 +75,9 @@ export async function POST(request: Request) {
       subtotalBeverage: input.subtotalBeverage,
       subtotal: input.subtotal,
       serviceCharge: input.serviceCharge,
-      localTax: input.localTax,
+      vat: input.vat,
+      serviceTax: input.serviceTax,
+      cityTax: input.cityTax,
       grandTotal: input.grandTotal,
       billDateTime: new Date(input.billDateTime),
       paidDateTime: input.paidDateTime ? new Date(input.paidDateTime) : null,
