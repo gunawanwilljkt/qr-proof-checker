@@ -37,8 +37,10 @@ const validBill = {
   subtotalBeverage: 75000,
   subtotal: 225000,
   serviceCharge: 22500,
-  localTax: 24750,
-  grandTotal: 272250,
+  vat: 24750,
+  serviceTax: 22500,
+  cityTax: 2250,
+  grandTotal: 299500,
   billDateTime: "2026-04-04T19:30:00+07:00",
   paidDateTime: "2026-04-04T20:15:00+07:00",
   paymentType: "card",
@@ -85,7 +87,7 @@ describe("Bills API", () => {
     expect(res.status).toBe(201);
     const body = await res.json();
     expect(body.bill.id).toBeDefined();
-    expect(body.bill.grandTotal).toBe(272250);
+    expect(body.bill.grandTotal).toBe(299500);
     expect(body.bill.signature).toBeDefined();
     expect(body.qrUrl).toContain(`/v/${body.bill.id}#`);
   });
