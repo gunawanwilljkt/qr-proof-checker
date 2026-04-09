@@ -64,14 +64,14 @@ export default function ShortVerifyPage() {
   if (loading) {
     return (
       <div className="mx-auto max-w-lg py-12 text-center">
-        <p className="text-gray-500">Verifying bill...</p>
+        <p className="text-slate-500">Verifying bill...</p>
       </div>
     );
   }
 
   return (
     <div className="mx-auto max-w-lg">
-      <h1 className="mb-6 text-2xl font-bold">Bill Verification</h1>
+      <h1 className="mb-6 text-2xl font-bold text-slate-50">Bill Verification</h1>
       <VerificationResult status={status} billData={billData as any} />
     </div>
   );

@@ -72,8 +72,8 @@ export default function VerifyPage() {
 
   return (
     <div className="mx-auto max-w-lg">
-      <h1 className="mb-6 text-2xl font-bold">Verify a Bill</h1>
-      <p className="mb-6 text-sm text-gray-600">
+      <h1 className="mb-6 text-2xl font-bold text-slate-50">Verify a Bill</h1>
+      <p className="mb-6 text-sm text-slate-400">
         Scan a QR code from a bill to verify its authenticity. You can use your
         camera, upload an image, or paste the QR data directly.
       </p>
@@ -81,7 +81,7 @@ export default function VerifyPage() {
       <QrScanner onScan={processQrData} />
 
       <div className="mt-6">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-slate-400">
           Or paste QR data / verification URL
         </label>
         <div className="mt-1 flex gap-2">
@@ -90,12 +90,12 @@ export default function VerifyPage() {
             value={manualInput}
             onChange={(e) => setManualInput(e.target.value)}
             placeholder="Paste URL or payload..."
-            className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm"
+            className="flex-1 rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-50"
           />
           <button
             onClick={handleManualVerify}
             disabled={verifying}
-            className="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-50"
+            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-500 disabled:opacity-50 transition-colors"
           >
             {verifying ? "Verifying..." : "Verify"}
           </button>

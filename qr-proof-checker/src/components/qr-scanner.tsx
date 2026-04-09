@@ -58,7 +58,7 @@ export default function QrScanner({ onScan }: QrScannerProps) {
   return (
     <div className="space-y-4">
       {error && (
-        <p className="rounded bg-red-50 p-3 text-sm text-red-600">{error}</p>
+        <p className="rounded-lg bg-rose-500/10 border border-rose-500/20 p-3 text-sm text-rose-400">{error}</p>
       )}
 
       <div className="flex gap-4">
@@ -67,11 +67,11 @@ export default function QrScanner({ onScan }: QrScannerProps) {
             setError(null);
             setScanning(!scanning);
           }}
-          className="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700"
+          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-500 transition-colors"
         >
           {scanning ? "Stop Camera" : "Scan with Camera"}
         </button>
-        <label className="cursor-pointer rounded border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+        <label className="cursor-pointer rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 transition-colors">
           Upload QR Image
           <input
             type="file"
@@ -83,7 +83,7 @@ export default function QrScanner({ onScan }: QrScannerProps) {
       </div>
 
       {scanning && (
-        <div id="qr-reader" ref={scannerRef} className="mx-auto max-w-sm" />
+        <div id="qr-reader" ref={scannerRef} className="mx-auto max-w-sm rounded-lg overflow-hidden" />
       )}
       <div id="qr-file-reader" className="hidden" />
     </div>
