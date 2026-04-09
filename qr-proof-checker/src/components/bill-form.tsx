@@ -14,6 +14,10 @@ const PAYMENT_TYPES = [
   { value: "transfer", label: "Transfer" },
 ];
 
+const inputClass =
+  "mt-1 w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-slate-50 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/20";
+const labelClass = "block text-sm font-medium text-slate-400";
+
 export default function BillForm({ onSubmit, loading }: BillFormProps) {
   const [voucherUse, setVoucherUse] = useState(false);
   const [hasMarketplace, setHasMarketplace] = useState(false);
@@ -28,7 +32,9 @@ export default function BillForm({ onSubmit, loading }: BillFormProps) {
       subtotalBeverage: Number(form.get("subtotalBeverage")),
       subtotal: Number(form.get("subtotal")),
       serviceCharge: Number(form.get("serviceCharge")),
-      localTax: Number(form.get("localTax")),
+      vat: Number(form.get("vat")),
+      serviceTax: Number(form.get("serviceTax")),
+      cityTax: Number(form.get("cityTax")),
       grandTotal: Number(form.get("grandTotal")),
       billDateTime: form.get("billDateTime") as string,
       paidDateTime: form.get("paidDateTime") || undefined,
@@ -52,51 +58,66 @@ export default function BillForm({ onSubmit, loading }: BillFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700">Guest Name (optional)</label>
-        <input name="guestName" type="text" className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+        <label className={labelClass}>Guest Name (optional)</label>
+        <input name="guestName" type="text" className={inputClass} />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Subtotal Food</label>
-          <input name="subtotalFood" type="number" min="0" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+          <label className={labelClass}>Subtotal Food</label>
+          <input name="subtotalFood" type="number" min="0" required className={inputClass} />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Subtotal Beverage</label>
-          <input name="subtotalBeverage" type="number" min="0" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+          <label className={labelClass}>Subtotal Beverage</label>
+          <input name="subtotalBeverage" type="number" min="0" required className={inputClass} />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Subtotal</label>
-          <input name="subtotal" type="number" min="0" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+          <label className={labelClass}>Subtotal</label>
+          <input name="subtotal" type="number" min="0" required className={inputClass} />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Service Charge</label>
-          <input name="serviceCharge" type="number" min="0" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Local Tax</label>
-          <input name="localTax" type="number" min="0" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Grand Total</label>
-          <input name="grandTotal" type="number" min="0" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+          <label className={labelClass}>Service Charge</label>
+          <input name="serviceCharge" type="number" min="0" required className={inputClass} />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Bill Date & Time</label>
-          <input name="billDateTime" type="datetime-local" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Paid Date & Time (optional)</label>
-          <input name="paidDateTime" type="datetime-local" className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+      <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-4">
+        <h3 className="mb-3 text-sm font-semibold text-indigo-400 uppercase tracking-wide">Tax Breakdown</h3>
+        <div className="grid grid-cols-3 gap-4">
+          <div>
+            <label className={labelClass}>VAT / PPN (11%)</label>
+            <input name="vat" type="number" min="0" required className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>Service Tax / PB1 (10%)</label>
+            <input name="serviceTax" type="number" min="0" required className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>City Tax</label>
+            <input name="cityTax" type="number" min="0" required className={inputClass} />
+          </div>
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">Payment Type</label>
-        <select name="paymentType" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2">
+        <label className={labelClass}>Grand Total</label>
+        <input name="grandTotal" type="number" min="0" required className={inputClass} />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className={labelClass}>Bill Date & Time</label>
+          <input name="billDateTime" type="datetime-local" required className={inputClass} />
+        </div>
+        <div>
+          <label className={labelClass}>Paid Date & Time (optional)</label>
+          <input name="paidDateTime" type="datetime-local" className={inputClass} />
+        </div>
+      </div>
+
+      <div>
+        <label className={labelClass}>Payment Type</label>
+        <select name="paymentType" required className={inputClass}>
           {PAYMENT_TYPES.map((pt) => (
             <option key={pt.value} value={pt.value}>{pt.label}</option>
           ))}
@@ -105,41 +126,41 @@ export default function BillForm({ onSubmit, loading }: BillFormProps) {
 
       <div className="space-y-3">
         <label className="flex items-center gap-2">
-          <input type="checkbox" checked={voucherUse} onChange={(e) => setVoucherUse(e.target.checked)} />
-          <span className="text-sm font-medium text-gray-700">Voucher Used</span>
+          <input type="checkbox" checked={voucherUse} onChange={(e) => setVoucherUse(e.target.checked)} className="rounded border-slate-600 bg-slate-800" />
+          <span className="text-sm font-medium text-slate-400">Voucher Used</span>
         </label>
         {voucherUse && (
           <div>
-            <label className="block text-sm font-medium text-gray-700">Voucher Code</label>
-            <input name="voucherCode" type="text" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+            <label className={labelClass}>Voucher Code</label>
+            <input name="voucherCode" type="text" required className={inputClass} />
           </div>
         )}
       </div>
 
       <div className="space-y-3">
         <label className="flex items-center gap-2">
-          <input type="checkbox" checked={hasMarketplace} onChange={(e) => setHasMarketplace(e.target.checked)} />
-          <span className="text-sm font-medium text-gray-700">Marketplace Order</span>
+          <input type="checkbox" checked={hasMarketplace} onChange={(e) => setHasMarketplace(e.target.checked)} className="rounded border-slate-600 bg-slate-800" />
+          <span className="text-sm font-medium text-slate-400">Marketplace Order</span>
         </label>
         {hasMarketplace && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Marketplace Partner</label>
-              <input name="marketplacePartner" type="text" required placeholder="e.g., GrabFood, GoFood, ShopeeFood" className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+              <label className={labelClass}>Marketplace Partner</label>
+              <input name="marketplacePartner" type="text" required placeholder="e.g., GrabFood, GoFood, ShopeeFood" className={inputClass} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Marketplace Reference Code</label>
-              <input name="marketplaceReferenceCode" type="text" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+              <label className={labelClass}>Marketplace Reference Code</label>
+              <input name="marketplaceReferenceCode" type="text" required className={inputClass} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Marketplace Bill Date & Time</label>
-              <input name="marketplaceBillDateTime" type="datetime-local" required className="mt-1 w-full rounded border border-gray-300 px-3 py-2" />
+              <label className={labelClass}>Marketplace Bill Date & Time</label>
+              <input name="marketplaceBillDateTime" type="datetime-local" required className={inputClass} />
             </div>
           </div>
         )}
       </div>
 
-      <button type="submit" disabled={loading} className="w-full rounded bg-blue-600 py-2 text-white hover:bg-blue-700 disabled:opacity-50">
+      <button type="submit" disabled={loading} className="w-full rounded-lg bg-indigo-600 py-2.5 text-white font-medium hover:bg-indigo-500 disabled:opacity-50 transition-colors">
         {loading ? "Creating..." : "Create Bill & Generate QR"}
       </button>
     </form>
